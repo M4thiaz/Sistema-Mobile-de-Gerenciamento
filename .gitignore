@@ -1,6 +1,6 @@
-# Learn more https://docs.github.com/en/get-started/getting-started-with-git/ignoring-files
+# TEMPLATE GITIGNORE - REACT NATIVE EXPO (PORTFÓLIO CRUD)
 
-# dependencies
+# Dependências
 node_modules/
 
 # Expo
@@ -9,7 +9,7 @@ dist/
 web-build/
 expo-env.d.ts
 
-# Native
+# Native / Builds locais do Expo
 .kotlin/
 *.orig.*
 *.jks
@@ -17,25 +17,38 @@ expo-env.d.ts
 *.p12
 *.key
 *.mobileprovision
+*.apk
+*.aab
+*.ipa
 
-# Metro
+# Metro Bundler
 .metro-health-check*
 
-# debug
+# Logs de Erros
 npm-debug.*
 yarn-debug.*
 yarn-error.*
+*.log
 
-# macOS
+# Sistema Operacional
 .DS_Store
+Thumbs.db
 *.pem
 
-# local env files
-.env*.local
+# Segurança: Variáveis de Ambiente (Muito Importante para o CRUD)
+.env
+.env.*
+!.env.example
 
-# typescript
+# TypeScript
 *.tsbuildinfo
 
-# generated native folders
+# Configurações de Editores
+.vscode/
+.idea/
+*.suo
+.ntvs
+
+# Android | IOS Nativo (Gerados pelo Expo Prebuild)
 /ios
 /android

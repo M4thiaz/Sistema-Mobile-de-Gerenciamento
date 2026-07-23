@@ -21,6 +21,8 @@ export default function Cadastro() {
         const ListaCadastros = [{nome, email, senha}]
         
       }
+    } catch(error){
+      console.log("Ocorreu um erro brusco")
     }
   }
 
