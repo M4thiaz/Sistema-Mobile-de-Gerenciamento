@@ -71,6 +71,33 @@ function MainTabs() {
           ),
         }}
       />
+      <Tab.Screen
+        name="Sobre"
+        component={Sobre}
+        options={{
+          tabBarIcon: ({ color, size }) => (
+            <Feather name="info" color={color} size={size} />
+          ),
+        }}
+      />
+      <Tab.Screen
+        name="Sobre"
+        component={Sobre}
+        options={{
+          tabBarIcon: ({ color, size }) => (
+            <Feather name="info" color={color} size={size} />
+          ),
+        }}
+      />
+      <Tab.Screen
+        name="Sobre"
+        component={Sobre}
+        options={{
+          tabBarIcon: ({ color, size }) => (
+            <Feather name="info" color={color} size={size} />
+          ),
+        }}
+      />
     </Tab.Navigator>
   );
 }
@@ -91,7 +118,7 @@ export default function App() {
 const styles = StyleSheet.create({
   splashContainer: {
     flex: 1,
-    backgroundColor: '#e5c7b6',
+    backgroundColor: 'bisque',
     alignItems: 'center',
     justifyContent: 'center',
   },
