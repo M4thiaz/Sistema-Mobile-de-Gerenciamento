@@ -22,7 +22,8 @@ const styles = StyleSheet.create({
         alignSelf: 'center',
         width: espacamento.xxl,
         padding: espacamento.sm,
-        borderRadius: radius.sm,
+        borderRadius: radius.lg,
+        backgroundColor: cores.secundaria
     },
     text: {
         textAlign: 'center',
