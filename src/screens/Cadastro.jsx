@@ -2,6 +2,14 @@ import { useState } from 'react';
 import { StyleSheet, Text, View, Button, Alert, TextInput } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import { cores } from '../themes/cores';
+import { tipografia } from '../themes/tipografia';
+import { espacamento } from '../themes/espacamento';
+import { radius } from '../themes/radius';
+import Botao from '../components/Botao.jsx'
+import InputUser from '../components/InputUser.jsx'
+import LogoBROE from '../components/LogoBROE.jsx';
+import { cadastrarUsuario } from '../services/storage.js';
 
 export default function Cadastro() {
 
@@ -27,27 +35,14 @@ export default function Cadastro() {
         throw new Error("A senha deve ter pelo menos 6 caracteres.")
       }
 
-      const checkLista = await AsyncStorage.getItem('UsuariosCadastrados');
-
-      const validacaoLista = checkLista ? JSON.parse(checkLista) : [];
-
-      const cadastroInvalido = validacaoLista.find(i => i.usuario === usuario || i.email === email)
-
-      if (cadastroInvalido) {
-        if (cadastroInvalido.email === email) throw new Error('Email já está sendo utilizado.')
-        if (cadastroInvalido.usuario === usuario) throw new Error('Nome já está sendo utilizado.')
-      }
-
-      const novoCadastro = { usuario, email, senha }
-      validacaoLista.push(novoCadastro);
-      await AsyncStorage.setItem('UsuariosCadastrados', JSON.stringify(validacaoLista));
-
-      Alert.alert('Cadastro realizado com sucesso!')
+      await cadastrarUsuario(usuario, email, senha)
 
       setUsuario('');
       setEmail('');
       setSenha('');
       setConfirmarSenha('');
+
+      Alert.alert('Sucesso', 'Cadastro realizado com sucesso!')
 
       navigation.navigate('Login')
 
@@ -58,62 +53,54 @@ export default function Cadastro() {
 
   return (
     <View style={styles.container}>
-      <View style={styles.header}>
-        <Text>Página de Cadastro</Text>
-      </View>
 
-      <View style={{ gap: 15 }}>
-        <TextInput
-          style={styles.inputs}
-          placeholder='Digite um nome de usuário:'
-          onChangeText={setUsuario}
-          value={usuario} />
+      <LogoBROE />
 
-        <TextInput
-          style={styles.inputs}
-          placeholder='Digite um email:'
-          onChangeText={setEmail}
-          value={email} />
-
-        <TextInput style={styles.inputs}
-          placeholder='Digite uma senha forte:'
-          onChangeText={setSenha}
+      <View>
+        <InputUser
+          setValue={setUsuario}
+          value={usuario}
+          placeholder={'Qual é o seu nome?'}
+        />
+        <InputUser
+          setValue={setEmail}
+          value={email}
+          placeholder={'Digite seu melhor email:'}
+        />
+        <InputUser
+          setValue={setSenha}
           value={senha}
-          secureTextEntry={true} />
-
-        <TextInput style={styles.inputs}
-          placeholder='Confirme sua senha:'
-          onChangeText={setConfirmarSenha}
+          placeholder={'Digite uma senha forte:'}
+          seguranca={true}
+        />
+        <InputUser
+          setValue={setConfirmarSenha}
           value={confirmarSenha}
-          secureTextEntry={true} />
+          placeholder={'Confirme a sua senha:'}
+          seguranca={true}
+        />
 
-        <Button title='Enviar cadastro' onPress={realizarCadastro} />
+        <Botao
+          onPress={realizarCadastro}
+          title={'Confirmar Cadastro'}
+        />
+
       </View>
 
     </View>
+
   );
 }
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: 'bisque',
+    backgroundColor: cores.fundo,
     alignItems: 'center',
-    padding: '30px',
     justifyContent: 'center'
 
   },
-  header: {
-    backgroundColor: '#e5c7b6',
-    padding: 20,
-    marginBottom: '50'
 
-  },
-  inputs: {
-    borderWidth: 2,
-    borderRadius: 20,
-    padding: 10,
-  }
 
 },
 );

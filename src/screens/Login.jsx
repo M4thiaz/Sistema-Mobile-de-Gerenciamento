@@ -2,13 +2,14 @@ import { useState } from 'react';
 import { Pressable, StyleSheet, Text, View, Image, Button, TouchableOpacity, Alert, TextInput } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import Botao from '../components/Botao.jsx'
-import InputUser from '../components/InputUser.jsx'
-import LogoBROE from '../components/LogoBROE.jsx';
 import { cores } from '../themes/cores.js';
 import { radius } from '../themes/radius.js';
 import { espacamento } from '../themes/espacamento.js';
 import { tipografia } from '../themes/tipografia.js';
+import Botao from '../components/Botao.jsx'
+import InputUser from '../components/InputUser.jsx'
+import LogoBROE from '../components/LogoBROE.jsx';
+import { verificarLogin } from '../services/storage.js';
 
 export default function Login() {
   const navigation = useNavigation();
@@ -20,7 +21,7 @@ export default function Login() {
     setEmailInput('')
     setSenhaInput('')
     navigation.navigate('Cadastro')
-    
+
   };
 
   const realizarLogin = async () => {
@@ -29,34 +30,21 @@ export default function Login() {
       return;
     }
 
-
     try {
-      const dadosSalvos = await AsyncStorage.getItem('UsuariosCadastrados');
+      await verificarLogin(emailInput, senhaInput);
 
-      if (dadosSalvos !== null) {
-        const listaUsuario = JSON.parse(dadosSalvos);
+      Alert.alert('Sucesso', 'Login efetuado com sucesso!');
+      navigation.replace('TabRoutes');
 
-        const loginValido = listaUsuario.find(i => i.email === emailInput && i.senha === senhaInput);
-
-        if (loginValido) {
-          Alert.alert('Login Encontrado!');
-          navigation.replace('Main');
-        } else {
-          throw new Error('Usuário ou senha incorretos.');
-        }
-
-      } else {
-        Alert.alert('Erro', 'Nenhum usuário cadastrado neste dispositivo.');
-      }
     } catch (error) {
-      Alert.alert('Erro', error.message || 'Falha ao ler dados de autenticação.');
+      Alert.alert('Erro', error.message || 'Falha ao realizar login.');
     }
   };
-
+  
   return (
     <View style={styles.container}>
 
-    <LogoBROE/>
+      <LogoBROE />
 
       <View>
         <InputUser
@@ -85,7 +73,7 @@ export default function Login() {
       </View>
     </View>
   );
-}
+};
 
 const styles = StyleSheet.create({
   container: {

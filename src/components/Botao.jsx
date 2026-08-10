@@ -20,7 +20,7 @@ export default function Botao({ title, onPress }) {
 const styles = StyleSheet.create({
     button: {
         alignSelf: 'center',
-        width: espacamento.xxl,
+        width: espacamento.xxxl,
         padding: espacamento.sm,
         borderRadius: radius.lg,
         backgroundColor: cores.secundaria
@@ -28,6 +28,6 @@ const styles = StyleSheet.create({
     text: {
         textAlign: 'center',
         fontSize: tipografia.pequeno,
-        fontFamily: tipografia.fonte2,
+        fontFamily: 'tipografia.fonte2',
     }
 });
