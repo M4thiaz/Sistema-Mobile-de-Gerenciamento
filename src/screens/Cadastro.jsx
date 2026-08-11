@@ -19,11 +19,13 @@ export default function Cadastro() {
   const [senha, setSenha] = useState('')
   const [email, setEmail] = useState('')
   const [confirmarSenha, setConfirmarSenha] = useState('')
+  const [estado, setEstado] = useState('')
+  const [cargo, setCargo] = useState('')
 
   const realizarCadastro = async () => {
     try {
 
-      if (!usuario || !email || !senha || !confirmarSenha) {
+      if (!usuario || !email || !senha || !confirmarSenha || !estado || !cargo) {
         throw new Error("Por favor, preencha todos os campos.");
       }
 
@@ -35,12 +37,15 @@ export default function Cadastro() {
         throw new Error("A senha deve ter pelo menos 6 caracteres.")
       }
 
-      await cadastrarUsuario(usuario, email, senha)
+      await cadastrarUsuario(usuario, email, senha, estado, cargo)
 
       setUsuario('');
       setEmail('');
       setSenha('');
       setConfirmarSenha('');
+      setEstado('');
+      setCargo('');
+      
 
       Alert.alert('Sucesso', 'Cadastro realizado com sucesso!')
 
@@ -66,6 +71,16 @@ export default function Cadastro() {
           setValue={setEmail}
           value={email}
           placeholder={'Digite seu melhor email:'}
+        />
+        <InputUser
+          setValue={setEstado}
+          value={estado}
+          placeholder={'Em que Estado reside?'}
+        />
+        <InputUser
+          setValue={setCargo}
+          value={cargo}
+          placeholder={'Com oque costuma trabalhar? '}
         />
         <InputUser
           setValue={setSenha}

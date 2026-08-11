@@ -1,7 +1,6 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
-// USUÁRIOS CADASTRO E VALIDAÇÃO
-export const cadastrarUsuario = async (usuario, email, senha) => {
+export const cadastrarUsuario = async (usuario, email, senha, estado, cargo) => {
     try {
 
         const checkLista = await AsyncStorage.getItem('UsuariosCadastrados');
@@ -15,7 +14,7 @@ export const cadastrarUsuario = async (usuario, email, senha) => {
             if (cadastroInvalido.usuario === usuario) throw new Error('Nome já está sendo utilizado.')
         }
 
-        const novoCadastro = { usuario, email, senha }
+        const novoCadastro = {id: Date.now().toString(), usuario, email, senha, estado, cargo }
         validacaoLista.push(novoCadastro);
         await AsyncStorage.setItem('UsuariosCadastrados', JSON.stringify(validacaoLista));
 
@@ -48,7 +47,3 @@ export const verificarLogin = async (emailInput, senhaInput) => {
     }
 };
 
-//PRODUTOS CRUD
-
-
-//USUARIOS CRUD

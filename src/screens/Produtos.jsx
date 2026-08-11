@@ -1,7 +1,11 @@
 import React, { useState } from 'react';
-import { StyleSheet, Text, View, Button, Alert, TextInput } from 'react-native';
+import { StyleSheet, Text, View, Alert } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import { tipografia } from "../themes/tipografia";
+import { espacamento } from "../themes/espacamento";
+import { radius } from "../themes/radius";
+import { cores } from "../themes/cores";
 
 export default function Cadastro() {
 
@@ -17,7 +21,7 @@ export default function Cadastro() {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: 'bisque',
+        backgroundColor: cores.fundo,
         alignItems: 'center',
         padding: '30px',
         justifyContent: 'center'
