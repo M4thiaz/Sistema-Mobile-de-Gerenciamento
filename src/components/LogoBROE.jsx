@@ -18,7 +18,7 @@ export default function LogoBROE() {
 
 const styles = StyleSheet.create({
     container:{
-        margin: espacamento.xl
+        margin: espacamento.md
     },
     img:{
         width:300,

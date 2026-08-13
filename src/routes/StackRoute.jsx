@@ -7,6 +7,9 @@ import TabRoutes from './TabRoute';
 import SplashScreen from "../components/SplashScreen";
 import UsuarioDetalhes from "../screens/Users/UsuarioDetalhes";
 import EditarUsuario from "../screens/Users/EditarUsuario";
+import CadastrarProduto from "../screens/Products/CadastrarProduto";
+import EditarProduto from "../screens/Products/EditarProduto";
+import ProdutoDetalhes from "../screens/Products/ProdutoDetalhes";
 
 const Stack = createNativeStackNavigator();
 
@@ -39,6 +42,21 @@ export default function StackRoute() {
             <Stack.Screen
                 name="EditarUsuario"
                 component={EditarUsuario}
+            />
+            
+            <Stack.Screen
+                name="CadastrarProduto"
+                component={CadastrarProduto}
+            />
+            
+            <Stack.Screen
+                name="EditarProduto"
+                component={EditarProduto}
+            />
+            
+            <Stack.Screen
+                name="ProdutoDetalhes"
+                component={ProdutoDetalhes}
             />
 
         </Stack.Navigator>

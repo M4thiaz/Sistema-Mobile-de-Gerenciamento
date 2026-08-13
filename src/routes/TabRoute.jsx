@@ -1,5 +1,6 @@
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { Feather } from "@expo/vector-icons";
+import { cores } from "../themes/cores";
 
 import Home from '../screens/Home';
 import Usuarios from '../screens/Usuarios';
@@ -15,7 +16,7 @@ export default function TabRoute() {
       screenOptions={{
         headerShown: false,
         tabBarStyle: {
-          backgroundColor: '#e5c7b6',
+          backgroundColor: cores.fundo,
         },
       }}
     >
@@ -34,7 +35,7 @@ export default function TabRoute() {
         component={Usuarios}
         options={{
           tabBarIcon: ({ color, size }) => (
-            <Feather name="info" color={color} size={size} />
+            <Feather name="users" color={color} size={size} />
           ),
         }}
       />
@@ -43,7 +44,7 @@ export default function TabRoute() {
         component={Produtos}
         options={{
           tabBarIcon: ({ color, size }) => (
-            <Feather name="info" color={color} size={size} />
+            <Feather name="package" color={color} size={size} />
           ),
         }}
       />
@@ -61,7 +62,7 @@ export default function TabRoute() {
         component={Contato}
         options={{
           tabBarIcon: ({ color, size }) => (
-            <Feather name="info" color={color} size={size} />
+            <Feather name="phone-call" color={color} size={size} />
           ),
         }}
       />
