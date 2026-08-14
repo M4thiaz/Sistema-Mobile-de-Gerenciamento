@@ -33,9 +33,8 @@ yarn-error.*
 # Sistema Operacional
 .DS_Store
 Thumbs.db
-*.pem
 
-# Segurança: Variáveis de Ambiente (Muito Importante para o CRUD)
+# Segurança
 .env
 .env.*
 !.env.example
@@ -49,6 +48,6 @@ Thumbs.db
 *.suo
 .ntvs
 
-# Android | IOS Nativo (Gerados pelo Expo Prebuild)
+# Android | IOS Nativo 
 /ios
 /android
