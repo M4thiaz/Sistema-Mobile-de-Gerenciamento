@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Pressable, StyleSheet, Text, View, Image, Button, TouchableOpacity, Alert, TextInput } from 'react-native';
+import { Pressable, StyleSheet, Text, View, Image, Button, TouchableOpacity, Alert, TextInput, KeyboardAvoidingView, Platform } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { cores } from '../themes/cores.js';
@@ -42,7 +42,7 @@ export default function Login() {
   };
   
   return (
-    <View style={styles.container}>
+    <KeyboardAvoidingView behavior={Platform.OS === 'ios' ? 'padding' : 'height'} style={styles.container}>
 
       <LogoBROE />
 
@@ -71,7 +71,7 @@ export default function Login() {
           </Text>
         </TouchableOpacity>
       </View>
-    </View>
+    </KeyboardAvoidingView>
   );
 };
 

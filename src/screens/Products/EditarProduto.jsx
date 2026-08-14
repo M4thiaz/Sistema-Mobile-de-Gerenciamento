@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { View, Text, TextInput, Pressable, StyleSheet, Alert, ActivityIndicator, } from 'react-native';
+import { View, Text, TextInput, Pressable, StyleSheet, Alert, ActivityIndicator, ScrollView, KeyboardAvoidingView, Platform } from 'react-native';
 
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
@@ -161,115 +161,118 @@ export default function EditarProduto({ route, navigation }) {
 
 
     return (
-        <View style={styles.container}>
+        <KeyboardAvoidingView behavior={Platform.OS === 'ios' ? 'padding' : 'height'} style={styles.container}>
 
             <Text style={styles.titulo}>
                 Editar produto
             </Text>
 
+            <ScrollView>
 
-            <Text style={styles.label}>
-                Nome
-            </Text>
+                <Text style={styles.label}>
+                    Nome
+                </Text>
 
-            <TextInput
-                style={styles.input}
-                value={nome}
-                onChangeText={setNome}
-                placeholder="Nome do produto"
-            />
-
-
-            {/* == == // == == */}
+                <TextInput
+                    style={styles.input}
+                    value={nome}
+                    onChangeText={setNome}
+                    placeholder="Nome do produto"
+                />
 
 
-            <Text style={styles.label}>
-                Descrição
-            </Text>
-
-            <TextInput
-                style={[
-                    styles.input,
-                    styles.inputDescricao
-                ]}
-                value={descricao}
-                onChangeText={setDescricao}
-                placeholder="Descrição do produto"
-                multiline
-            />
+                {/* == == // == == */}
 
 
-            {/* == == // == == */}
+                <Text style={styles.label}>
+                    Descrição
+                </Text>
+
+                <TextInput
+                    style={[
+                        styles.input,
+                        styles.inputDescricao
+                    ]}
+                    value={descricao}
+                    onChangeText={setDescricao}
+                    placeholder="Descrição do produto"
+                    multiline
+                />
 
 
-            <Text style={styles.label}>
-                Categoria
-            </Text>
-
-            <TextInput
-                style={styles.input}
-                value={categoria}
-                onChangeText={setCategoria}
-                placeholder="Ex: Eletrônicos"
-            />
+                {/* == == // == == */}
 
 
-            {/* == == // == == */}
+                <Text style={styles.label}>
+                    Categoria
+                </Text>
+
+                <TextInput
+                    style={styles.input}
+                    value={categoria}
+                    onChangeText={setCategoria}
+                    placeholder="Ex: Eletrônicos"
+                />
 
 
-            <Text style={styles.label}>
-                Quantidade
-            </Text>
-
-            <TextInput
-                style={styles.input}
-                value={quantidade}
-                onChangeText={setQuantidade}
-                placeholder="Quantidade disponível"
-                keyboardType="numeric"
-            />
+                {/* == == // == == */}
 
 
-            {/* == == // == == */}
+                <Text style={styles.label}>
+                    Quantidade
+                </Text>
+
+                <TextInput
+                    style={styles.input}
+                    value={quantidade}
+                    onChangeText={setQuantidade}
+                    placeholder="Quantidade disponível"
+                    keyboardType="numeric"
+                />
 
 
-            <Text style={styles.label}>
-                Valor
-            </Text>
-
-            <TextInput
-                style={styles.input}
-                value={valor}
-                onChangeText={setValor}
-                placeholder="Ex: 1500,00"
-                keyboardType="decimal-pad"
-            />
+                {/* == == // == == */}
 
 
-            {/* == == // == == */}
+                <Text style={styles.label}>
+                    Valor
+                </Text>
+
+                <TextInput
+                    style={styles.input}
+                    value={valor}
+                    onChangeText={setValor}
+                    placeholder="Ex: 1500,00"
+                    keyboardType="decimal-pad"
+                />
 
 
-            <Pressable
-                style={styles.botao}
-                onPress={salvarAlteracoes}
-                disabled={salvando}
-            >
+                {/* == == // == == */}
 
-                {salvando ? (
 
-                    <ActivityIndicator color="#fff" />
+                <Pressable
+                    style={styles.botao}
+                    onPress={salvarAlteracoes}
+                    disabled={salvando}
+                >
 
-                ) : (
+                    {salvando ? (
 
-                    <Text style={styles.textoBotao}>
-                        Salvar alterações
-                    </Text>
+                        <ActivityIndicator color="#fff" />
 
-                )}
+                    ) : (
 
-            </Pressable>
+                        <Text style={styles.textoBotao}>
+                            Salvar alterações
+                        </Text>
 
-        </View>
+                    )}
+
+                </Pressable>
+
+            </ScrollView>
+
+        </KeyboardAvoidingView>
     );
 }
 

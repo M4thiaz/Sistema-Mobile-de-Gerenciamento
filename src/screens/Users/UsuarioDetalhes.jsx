@@ -1,6 +1,6 @@
 import { useCallback, useState } from 'react';
 import { useFocusEffect, useNavigation } from '@react-navigation/native';
-import { View, Text, StyleSheet, ActivityIndicator, Pressable, Alert } from 'react-native';
+import { View, Text, StyleSheet, ActivityIndicator, Pressable, Alert, ScrollView, KeyboardAvoidingView, Platform } from 'react-native';
 
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
@@ -107,76 +107,80 @@ export default function UsuarioDetalhes({ route }) {
     }
 
     return (
-        <View style={styles.container}>
+        <KeyboardAvoidingView behavior={Platform.OS === 'ios' ? 'padding' : 'height'} style={styles.container}>
 
             <Text style={styles.titulo}>
                 Detalhes do usuário
             </Text>
 
-            <View style={styles.card}>
+            <ScrollView>
 
-                <Text style={styles.label}>
-                    Usuário
-                </Text>
+                <View style={styles.card}>
 
-                <Text style={styles.valor}>
-                    {usuario.usuario}
-                </Text>
-
-                {/* == == // == == */}
-
-                <Text style={styles.label}>
-                    E-mail
-                </Text>
-
-                <Text style={styles.valor}>
-                    {usuario.email}
-                </Text>
-
-                {/* == == // == == */}
-
-                <Text style={styles.label}>
-                    Estado
-                </Text>
-
-                <Text style={styles.valor}>
-                    {usuario.estado}
-                </Text>
-                
-                {/* == == // == == */}
-
-                <Text style={styles.label}>
-                    Área de atuação
-                </Text>
-
-                <Text style={styles.valor}>
-                    {usuario.cargo}
-                </Text>
-
-                <Text>{'\n'}</Text>
-                {/* == == // == == */}
-
-                <Botao
-                    onPress={() => {
-                        navigation.navigate('EditarUsuario', {
-                            usuarioId: usuario.id,
-                        });
-                    }}
-                    title={'Editar informações'}
-                />
-
-                <Pressable
-                    style={styles.botaoExcluir}
-                    onPress={confirmarExclusao}
-                >
-                    <Text style={styles.textoBotaoExcluir}>
-                        Excluir usuário
+                    <Text style={styles.label}>
+                        Usuário
                     </Text>
-                </Pressable>
 
-            </View>
+                    <Text style={styles.valor}>
+                        {usuario.usuario}
+                    </Text>
 
-        </View>
+                    {/* == == // == == */}
+
+                    <Text style={styles.label}>
+                        E-mail
+                    </Text>
+
+                    <Text style={styles.valor}>
+                        {usuario.email}
+                    </Text>
+
+                    {/* == == // == == */}
+
+                    <Text style={styles.label}>
+                        Estado
+                    </Text>
+
+                    <Text style={styles.valor}>
+                        {usuario.estado}
+                    </Text>
+
+                    {/* == == // == == */}
+
+                    <Text style={styles.label}>
+                        Área de atuação
+                    </Text>
+
+                    <Text style={styles.valor}>
+                        {usuario.cargo}
+                    </Text>
+
+                    <Text>{'\n'}</Text>
+                    {/* == == // == == */}
+
+                    <Botao
+                        onPress={() => {
+                            navigation.navigate('EditarUsuario', {
+                                usuarioId: usuario.id,
+                            });
+                        }}
+                        title={'Editar informações'}
+                    />
+
+                    <Pressable
+                        style={styles.botaoExcluir}
+                        onPress={confirmarExclusao}
+                    >
+                        <Text style={styles.textoBotaoExcluir}>
+                            Excluir usuário
+                        </Text>
+                    </Pressable>
+
+                </View>
+
+            </ScrollView>
+
+        </KeyboardAvoidingView>
     );
 }
 

@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { View, Text, TextInput, Pressable, StyleSheet, Alert, ActivityIndicator, } from 'react-native';
+import { View, Text, TextInput, Pressable, StyleSheet, Alert, ActivityIndicator, ScrollView, KeyboardAvoidingView, Platform } from 'react-native';
 
 import { cadastrarProduto } from '../../services/produtos';
 
@@ -77,92 +77,95 @@ export default function CadastrarProduto({ navigation }) {
 
 
     return (
-        <View style={styles.container}>
+        <KeyboardAvoidingView behavior={Platform.OS === 'ios' ? 'padding' : 'height'} style={styles.container}>
 
             <Text style={styles.titulo}>
                 Cadastrar produto
             </Text>
 
+            <ScrollView>
 
-            <Text style={styles.label}>
-                Nome
-            </Text>
+                <Text style={styles.label}>
+                    Nome
+                </Text>
 
-            <TextInput
-                style={styles.input}
-                value={nome}
-                onChangeText={setNome}
-                placeholder="Nome do produto"
-            />
-
-
-            <Text style={styles.label}>
-                Descrição
-            </Text>
-
-            <TextInput
-                style={[styles.input, styles.inputDescricao]}
-                value={descricao}
-                onChangeText={setDescricao}
-                placeholder="Descrição do produto"
-                multiline
-            />
+                <TextInput
+                    style={styles.input}
+                    value={nome}
+                    onChangeText={setNome}
+                    placeholder="Nome do produto"
+                />
 
 
-            <Text style={styles.label}>
-                Categoria
-            </Text>
+                <Text style={styles.label}>
+                    Descrição
+                </Text>
 
-            <TextInput
-                style={styles.input}
-                value={categoria}
-                onChangeText={setCategoria}
-                placeholder="Ex: Eletrônicos"
-            />
-
-
-            <Text style={styles.label}>
-                Quantidade
-            </Text>
-
-            <TextInput
-                style={styles.input}
-                value={quantidade}
-                onChangeText={setQuantidade}
-                placeholder="Quantidade disponível"
-                keyboardType="numeric"
-            />
+                <TextInput
+                    style={[styles.input, styles.inputDescricao]}
+                    value={descricao}
+                    onChangeText={setDescricao}
+                    placeholder="Descrição do produto"
+                    multiline
+                />
 
 
-            <Text style={styles.label}>
-                Valor
-            </Text>
+                <Text style={styles.label}>
+                    Categoria
+                </Text>
 
-            <TextInput
-                style={styles.input}
-                value={valor}
-                onChangeText={setValor}
-                placeholder="Ex: 1500,00"
-                keyboardType="decimal-pad"
-            />
+                <TextInput
+                    style={styles.input}
+                    value={categoria}
+                    onChangeText={setCategoria}
+                    placeholder="Ex: Eletrônicos"
+                />
 
 
-            <Pressable
-                style={styles.botao}
-                onPress={salvarProduto}
-                disabled={salvando}
-            >
+                <Text style={styles.label}>
+                    Quantidade
+                </Text>
 
-                {salvando ? (
-                    <ActivityIndicator color="#fff" />) : (
-                    <Text style={styles.textoBotao}>
-                        Cadastrar produto
-                    </Text>
-                )}
+                <TextInput
+                    style={styles.input}
+                    value={quantidade}
+                    onChangeText={setQuantidade}
+                    placeholder="Quantidade disponível"
+                    keyboardType="numeric"
+                />
 
-            </Pressable>
 
-        </View>
+                <Text style={styles.label}>
+                    Valor
+                </Text>
+
+                <TextInput
+                    style={styles.input}
+                    value={valor}
+                    onChangeText={setValor}
+                    placeholder="Ex: 1500,00"
+                    keyboardType="decimal-pad"
+                />
+
+
+                <Pressable
+                    style={styles.botao}
+                    onPress={salvarProduto}
+                    disabled={salvando}
+                >
+
+                    {salvando ? (
+                        <ActivityIndicator color="#fff" />) : (
+                        <Text style={styles.textoBotao}>
+                            Cadastrar produto
+                        </Text>
+                    )}
+
+                </Pressable>
+
+            </ScrollView>
+
+        </KeyboardAvoidingView>
     );
 }
 

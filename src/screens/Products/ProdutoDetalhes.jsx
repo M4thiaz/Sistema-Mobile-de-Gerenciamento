@@ -1,5 +1,5 @@
 import { useCallback, useState } from 'react';
-import { View, Text, StyleSheet, ActivityIndicator, Pressable, Alert } from 'react-native';
+import { View, Text, StyleSheet, ActivityIndicator, Pressable, Alert, ScrollView, KeyboardAvoidingView, Platform } from 'react-native';
 import { useFocusEffect, useNavigation, } from '@react-navigation/native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
@@ -114,104 +114,107 @@ export default function ProdutoDetalhes({ route }) {
 
 
     return (
-        <View style={styles.container}>
+        <KeyboardAvoidingView behavior={Platform.OS === 'ios' ? 'padding' : 'height'} style={styles.container}>
 
             <Text style={styles.titulo}>
                 Detalhes do produto
             </Text>
 
+            <ScrollView>
 
-            <View style={styles.card}>
+                <View style={styles.card}>
 
-                <Text style={styles.label}>
-                    Nome
-                </Text>
-
-                <Text style={styles.valor}>
-                    {produto.nome}
-                </Text>
-
-
-                {/* == == // == == */}
-
-
-                <Text style={styles.label}>
-                    Descrição
-                </Text>
-
-                <Text style={styles.valor}>
-                    {produto.descricao}
-                </Text>
-
-
-                {/* == == // == == */}
-
-
-                <Text style={styles.label}>
-                    Categoria
-                </Text>
-
-                <Text style={styles.valor}>
-                    {produto.categoria}
-                </Text>
-
-
-                {/* == == // == == */}
-
-
-                <Text style={styles.label}>
-                    Quantidade
-                </Text>
-
-                <Text style={styles.valor}>
-                    {produto.quantidade}
-                </Text>
-
-
-                {/* == == // == == */}
-
-
-                <Text style={styles.label}>
-                    Valor
-                </Text>
-
-                <Text style={styles.valor}>
-                    R$ {Number(produto.valor)
-                        .toFixed(2)
-                        .replace('.', ',')}
-                </Text>
-
-                <Text>{'\n'}</Text>
-                {/* == == // == == */}
-
-
-                <Botao
-                    onPress={() => {
-
-                        navigation.navigate(
-                            'EditarProduto',
-                            {
-                                produtoId: produto.id,
-                            }
-                        );
-
-                    }}
-                    title="Editar informações"
-                />
-
-
-                <Pressable 
-                    style={styles.botaoExcluir}
-                    onPress={confirmarExclusao}
-                >
-                    <Text style={styles.textoBotaoExcluir}>
-                        Excluir produto
+                    <Text style={styles.label}>
+                        Nome
                     </Text>
-                </Pressable>
 
-            </View>
+                    <Text style={styles.valor}>
+                        {produto.nome}
+                    </Text>
 
-        </View>
+
+                    {/* == == // == == */}
+
+
+                    <Text style={styles.label}>
+                        Descrição
+                    </Text>
+
+                    <Text style={styles.valor}>
+                        {produto.descricao}
+                    </Text>
+
+
+                    {/* == == // == == */}
+
+
+                    <Text style={styles.label}>
+                        Categoria
+                    </Text>
+
+                    <Text style={styles.valor}>
+                        {produto.categoria}
+                    </Text>
+
+
+                    {/* == == // == == */}
+
+
+                    <Text style={styles.label}>
+                        Quantidade
+                    </Text>
+
+                    <Text style={styles.valor}>
+                        {produto.quantidade}
+                    </Text>
+
+
+                    {/* == == // == == */}
+
+
+                    <Text style={styles.label}>
+                        Valor
+                    </Text>
+
+                    <Text style={styles.valor}>
+                        R$ {Number(produto.valor)
+                            .toFixed(2)
+                            .replace('.', ',')}
+                    </Text>
+
+                    <Text>{'\n'}</Text>
+                    {/* == == // == == */}
+
+
+                    <Botao
+                        onPress={() => {
+
+                            navigation.navigate(
+                                'EditarProduto',
+                                {
+                                    produtoId: produto.id,
+                                }
+                            );
+
+                        }}
+                        title="Editar informações"
+                    />
+
+
+                    <Pressable
+                        style={styles.botaoExcluir}
+                        onPress={confirmarExclusao}
+                    >
+                        <Text style={styles.textoBotaoExcluir}>
+                            Excluir produto
+                        </Text>
+                    </Pressable>
+
+                </View>
+
+            </ScrollView>
+
+        </KeyboardAvoidingView>
     );
 }
 

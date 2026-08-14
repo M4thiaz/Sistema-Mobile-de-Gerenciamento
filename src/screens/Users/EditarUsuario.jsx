@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { View, Text, TextInput, Pressable, StyleSheet, Alert, ActivityIndicator, } from 'react-native';
+import { View, Text, TextInput, Pressable, StyleSheet, Alert, ActivityIndicator, ScrollView, KeyboardAvoidingView, Platform} from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 import { atualizarUsuario } from '../../services/user';
@@ -57,7 +57,7 @@ export default function EditarUsuario({ route, navigation }) {
     async function salvarAlteracoes() {
 
         if (!usuario.trim() || !email.trim()) {
-            Alert.alert('Atenção','Usuário e e-mail são obrigatórios.');
+            Alert.alert('Atenção', 'Usuário e e-mail são obrigatórios.');
             return;
         }
 
@@ -71,7 +71,7 @@ export default function EditarUsuario({ route, navigation }) {
                 cargo: cargo.trim(),
             });
 
-            Alert.alert('Sucesso','Usuário atualizado com sucesso.',
+            Alert.alert('Sucesso', 'Usuário atualizado com sucesso.',
                 [
                     {
                         text: 'Ok',
@@ -100,82 +100,86 @@ export default function EditarUsuario({ route, navigation }) {
     }
 
     return (
-        <View style={styles.container}>
+        <KeyboardAvoidingView behavior={Platform.OS === 'ios' ? 'padding' : 'height'} style={styles.container}>
 
             <Text style={styles.titulo}>
                 Editar usuário
             </Text>
 
-            <Text style={styles.label}>
-                Usuário
-            </Text>
+            <ScrollView>
 
-            <TextInput
-                style={styles.input}
-                value={usuario}
-                onChangeText={setUsuario}
-                placeholder="Nome de usuário"
-            />
+                <Text style={styles.label}>
+                    Usuário
+                </Text>
 
-            {/* == == // == ==  */}
+                <TextInput
+                    style={styles.input}
+                    value={usuario}
+                    onChangeText={setUsuario}
+                    placeholder="Nome de usuário"
+                />
+
+                {/* == == // == ==  */}
+
+                <Text style={styles.label}>
+                    E-mail
+                </Text>
+
+                <TextInput
+                    style={styles.input}
+                    value={email}
+                    onChangeText={setEmail}
+                    placeholder="E-mail"
+                    keyboardType="email-address"
+                    autoCapitalize="none"
+                />
+
+                {/* == == // == ==  */}
+
+                <Text style={styles.label}>
+                    Estado
+                </Text>
+
+                <TextInput
+                    style={styles.input}
+                    value={estado}
+                    onChangeText={setEstado}
+                    placeholder="Ex: Minas Gerais"
+                />
+
+                {/* == == // == ==  */}
+
+                <Text style={styles.label}>
+                    Cargo
+                </Text>
+
+                <TextInput
+                    style={styles.input}
+                    value={cargo}
+                    onChangeText={setCargo}
+                    placeholder="Ex: Gerente de Marketing"
+                />
+
+                <Text>{'\n'}</Text>
+                {/* == == // == ==  */}
+
+                <Pressable
+                    style={styles.botao}
+                    onPress={salvarAlteracoes}
+                    disabled={salvando}
+                >
+                    {salvando ? (
+                        <ActivityIndicator color="#fff" />
+                    ) : (
+                        <Text style={styles.textoBotao}>
+                            Salvar alterações
+                        </Text>
+                    )}
+                </Pressable>
+
+            </ScrollView>
             
-            <Text style={styles.label}>
-                E-mail
-            </Text>
-
-            <TextInput
-                style={styles.input}
-                value={email}
-                onChangeText={setEmail}
-                placeholder="E-mail"
-                keyboardType="email-address"
-                autoCapitalize="none"
-            />
-
-            {/* == == // == ==  */}
-
-            <Text style={styles.label}>
-                Estado
-            </Text>
-
-            <TextInput
-                style={styles.input}
-                value={estado}
-                onChangeText={setEstado}
-                placeholder="Ex: Minas Gerais"
-            />
-
-            {/* == == // == ==  */}
-
-            <Text style={styles.label}>
-                Cargo
-            </Text>
-
-            <TextInput
-                style={styles.input}
-                value={cargo}
-                onChangeText={setCargo}
-                placeholder="Ex: Gerente de Marketing"
-            />
-
-            <Text>{'\n'}</Text>
-            {/* == == // == ==  */}
-            
-            <Pressable
-                style={styles.botao}
-                onPress={salvarAlteracoes}
-                disabled={salvando}
-            >
-                {salvando ? (
-                    <ActivityIndicator color="#fff" />
-                ) : (
-                    <Text style={styles.textoBotao}>
-                        Salvar alterações
-                    </Text>
-                )}
-            </Pressable>
-
-        </View>
+        </KeyboardAvoidingView>
     );
 }
 

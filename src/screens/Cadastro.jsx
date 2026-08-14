@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { StyleSheet, Text, View, Button, Alert, TextInput } from 'react-native';
+import { StyleSheet, Text, View, Button, Alert, TextInput, KeyboardAvoidingView, Platform, ScrollView } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { cores } from '../themes/cores';
@@ -45,7 +45,7 @@ export default function Cadastro() {
       setConfirmarSenha('');
       setEstado('');
       setCargo('');
-      
+
 
       Alert.alert('Sucesso', 'Cadastro realizado com sucesso!')
 
@@ -57,52 +57,53 @@ export default function Cadastro() {
   }
 
   return (
-    <View style={styles.container}>
+    <KeyboardAvoidingView behavior={Platform.OS === 'android' ? 'height' : 'padding'} style={styles.container}>
 
-      <LogoBROE />
+      <ScrollView>
+        
+          <LogoBROE />
 
-      <View>
-        <InputUser
-          setValue={setUsuario}
-          value={usuario}
-          placeholder={'Qual é o seu nome?'}
-        />
-        <InputUser
-          setValue={setEmail}
-          value={email}
-          placeholder={'Digite seu melhor email:'}
-        />
-        <InputUser
-          setValue={setEstado}
-          value={estado}
-          placeholder={'Em que Estado reside?'}
-        />
-        <InputUser
-          setValue={setCargo}
-          value={cargo}
-          placeholder={'Com oque costuma trabalhar? '}
-        />
-        <InputUser
-          setValue={setSenha}
-          value={senha}
-          placeholder={'Digite uma senha forte:'}
-          seguranca={true}
-        />
-        <InputUser
-          setValue={setConfirmarSenha}
-          value={confirmarSenha}
-          placeholder={'Confirme a sua senha:'}
-          seguranca={true}
-        />
+          <InputUser
+            setValue={setUsuario}
+            value={usuario}
+            placeholder={'Qual é o seu nome?'}
+          />
+          <InputUser
+            setValue={setEmail}
+            value={email}
+            placeholder={'Digite seu melhor email:'}
+          />
+          <InputUser
+            setValue={setEstado}
+            value={estado}
+            placeholder={'Em que Estado reside?'}
+          />
+          <InputUser
+            setValue={setCargo}
+            value={cargo}
+            placeholder={'Com oque costuma trabalhar? '}
+          />
+          <InputUser
+            setValue={setSenha}
+            value={senha}
+            placeholder={'Digite uma senha forte:'}
+            seguranca={true}
+          />
+          <InputUser
+            setValue={setConfirmarSenha}
+            value={confirmarSenha}
+            placeholder={'Confirme a sua senha:'}
+            seguranca={true}
+          />
 
-        <Botao
-          onPress={realizarCadastro}
-          title={'Confirmar Cadastro'}
-        />
+          <Botao
+            onPress={realizarCadastro}
+            title={'Confirmar Cadastro'}
+          />
 
-      </View>
+      </ScrollView>
 
-    </View>
+    </KeyboardAvoidingView>
 
   );
 }
@@ -112,10 +113,8 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: cores.fundo,
     alignItems: 'center',
-    justifyContent: 'center'
-
+    justifyContent: 'center',
   },
-
 
 },
 );
